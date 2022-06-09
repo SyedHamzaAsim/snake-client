@@ -10,6 +10,11 @@ const connect = function () {
     console.log("Server says: ", data);
   });
 
+  conn.on("connect", () => {
+    console.log("Connection secured");
+    conn.write("Name: SHA");
+  });
+
   return conn;
 };
 

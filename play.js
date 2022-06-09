@@ -1,5 +1,24 @@
 // establishes a connection with the game server
 const connect = require('./client')
 
+const setupInput = function () {
+  const stdin = process.stdin;
+  stdin.setRawMode(true);
+  stdin.setEncoding("utf8");
+  stdin.resume();
+  stdin.on("data", handleUserInput);
+  return stdin;
+};
+
+
+const handleUserInput = function (data) {
+  if (data === '\u0003') {
+    console.log("goodbye");
+    process.exit();
+  }
+};
+
+setupInput();
+
 console.log("Connecting ...");
 connect();  
